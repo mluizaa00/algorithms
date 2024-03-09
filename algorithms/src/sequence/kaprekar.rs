@@ -1,3 +1,6 @@
+use crate::util::integer::IntegerVec;
+use crate::util::integer::Integer;
+
 pub fn kaprekar() {
     let mut number = 923;
 
@@ -17,21 +20,13 @@ pub fn kaprekar() {
 }
 
 fn result(number: i32) -> i32 {
-    let algarisms: Vec<u32> = number.to_string()
-        .chars()
-        .map(|char| char.to_digit(10).unwrap_or(0))
-        .collect();
+    let algarisms: Vec<i32> = number.to_algarisms();
 
     let mut major = algarisms.clone();
-    major.sort_by(|a, b| b.cmp(a));
+    major.sort_by_descending();
     
     let mut minor = algarisms.clone();
     minor.sort();
 
-    char_to_int(major) - char_to_int(minor)
-}
-
-fn char_to_int(algarisms: Vec<u32>) -> i32 {
-    algarisms.iter()
-        .fold(0, |acc, &digit| acc * 10 + digit as i32)
+    major.char_to_int() - minor.char_to_int()
 }
