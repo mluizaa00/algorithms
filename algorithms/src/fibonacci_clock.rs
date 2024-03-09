@@ -31,7 +31,7 @@ pub fn clock(
     matrix.fill(1, blue_rows_as_present.unwrap_or_else(Vec::new));
     matrix.fill(2, green_rows_as_present.unwrap_or_else(Vec::new));
 
-    matrix::print(&mut matrix);
+    matrix::print(&matrix);
     
     let hour = matrix.calculate(COLUMNS, &column_weight, 0, 1, 1);
     let minutes = matrix.calculate(COLUMNS, &column_weight, 1, 2, 5);
@@ -49,7 +49,7 @@ pub struct Clock {
     minutes: i32,
 }
 
-trait MatrixFill {
+trait FibonacciClockMatrix {
     fn fill(&mut self, row: usize, map: Vec<usize>);
     fn calculate(
         &mut self,
@@ -61,7 +61,7 @@ trait MatrixFill {
     ) -> i32;
 }
 
-impl MatrixFill for Vec<Vec<i32>> {
+impl FibonacciClockMatrix for Vec<Vec<i32>> {
     fn fill(&mut self, row: usize, indices: Vec<usize>) {
         if indices.is_empty() || self.is_empty() {
             return;
