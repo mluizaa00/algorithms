@@ -7,5 +7,5 @@ fn main() {
     //fibonacci::sequence(20);
     // fibonacci_clock::clock(Some(vec!(3, 4)),None,Some(vec!(3)),);
 
-    sequence::kaprekar::kaprekar();
+    sequence::kaprekar::kaprekar(321);
 }
