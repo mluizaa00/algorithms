@@ -80,16 +80,12 @@ impl FibonacciClockMatrix for Vec<Vec<i32>> {
         row_two: usize,
         multiplier: i32,
     ) -> i32 {
-        let mut value = 0;
-        for index in 0..columns {
+        (0..columns).fold(0, |acc, index| {
             let weight = weights[index];
             let red = self[row_one][index] * weight;
             let blue = self[row_two][index] * weight;
-
-            value = value + (red + blue) * multiplier;
-        }
-
-        value
+            acc + (red + blue) * multiplier
+        })
     }
 }
 
