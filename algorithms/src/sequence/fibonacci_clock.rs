@@ -25,7 +25,7 @@ pub fn clock(
 ) -> Clock {
     let column_weight = vec![1, 1, 3, 5, 8];
 
-    let mut matrix = vec![vec![0; COLUMNS]; ROWS];
+    let mut matrix = matrix::create(COLUMNS, ROWS);
 
     matrix.fill(0, red_rows_as_present.unwrap_or_else(Vec::new));
     matrix.fill(1, blue_rows_as_present.unwrap_or_else(Vec::new));
