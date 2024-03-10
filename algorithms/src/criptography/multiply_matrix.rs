@@ -1,7 +1,8 @@
 use crate::util::matrix;
+use crate::util::converter;
 
 pub fn criptography() {
-    let mut codifying = matrix::create(2, 2);
+    let mut codifying: Vec<Vec<i32>> = matrix::create(2, 2);
     codifying[0][0] = 3;
     codifying[0][1] = 2;
     codifying[1][0] = 1;
@@ -10,7 +11,7 @@ pub fn criptography() {
     println!("The codifying matrix is the following one:");
     matrix::print(&codifying);
 
-    let mut decodifying = matrix::create(2, 2);
+    let mut decodifying: Vec<Vec<i32>> = matrix::create(2, 2);
     decodifying[0][0] = 1;
     decodifying[0][1] = -2;
     decodifying[1][0] = -1;
@@ -25,29 +26,26 @@ pub fn criptography() {
     ];
 
     
-    let message_with_code: Vec<Vec<u32>> = message
+    let message_with_code: Vec<Vec<i32>> = message
         .iter()
         .map(|row| {
             row.iter()
-                .map(|&letter| letter_to_code(letter).unwrap_or(0))
-                .collect::<Vec<u32>>()
+                .map(|&letter| converter::letter_to_code(letter).unwrap_or(1))
+                .collect::<Vec<i32>>()
         })
         .collect();
 
     println!("The message with code is:");
     matrix::print(&message_with_code);
 
-    let codified_message: Vec<Vec<u32>> = matrix::multiply(message_with_code, codifying);
+    let codified_message = matrix::multiply(message_with_code, codifying);
 
     println!("The codified message is:");
     matrix::print(&codified_message);
 
-}
+    let decodified_message = matrix::multiply(codified_message, decodifying);
 
-fn letter_to_code(letter: char) -> Option<u32> {
-    if letter.is_ascii_alphabetic() {
-        return Some(letter.to_ascii_uppercase() as u32 - 'A' as u32 + 1);
-    } 
-    
-    None
+    println!("The decodified message is:");
+    matrix::print(&decodified_message);
+
 }

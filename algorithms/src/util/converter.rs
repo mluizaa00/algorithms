@@ -10,3 +10,12 @@ pub fn to_algarisms<T: From<u8> + ToString>(number: T) -> Vec<i32> {
         .map(|char| char.to_digit(10).unwrap_or(0) as i32)
         .collect()
 }
+
+pub fn letter_to_code<T: From<u8>>(letter: char) -> Option<T> {
+    if letter.is_ascii_alphabetic() {
+        let code = letter.to_ascii_uppercase() as u8 - b'A' + 1;
+        return Some(T::from(code));
+    } 
+    
+    None
+}
