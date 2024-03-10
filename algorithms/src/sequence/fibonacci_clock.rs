@@ -31,6 +31,7 @@ pub fn clock(
     matrix.fill(1, blue_rows_as_present.unwrap_or_else(Vec::new));
     matrix.fill(2, green_rows_as_present.unwrap_or_else(Vec::new));
 
+    println!("The matrix in operation is the following one:");
     matrix::print(&matrix);
     
     let hour = matrix.calculate(COLUMNS, &column_weight, 0, 1, 1);
